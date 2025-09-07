@@ -5,6 +5,7 @@ services:
     image: mynode:v2
     # ports:
     #   - 8080:8080
+    restart: always
     networks:
       - entry
       - server
@@ -18,6 +19,7 @@ services:
     image: mynginx:v2
     ports:
       - 80:80
+    restart: always
     networks:
       - entry
     depends_on:
@@ -30,6 +32,7 @@ services:
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    restart: always
     networks:
       - server
     volumes:
