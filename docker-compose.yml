@@ -1,0 +1,44 @@
+name: nodejs-practice
+
+services:
+  webserver:
+    image: mynode:v2
+    # ports:
+    #   - 8080:8080
+    networks:
+      - entry
+      - server
+    depends_on:
+      - db
+    # deploy:
+    #   mode: replicated
+    #   replicas: 3
+
+  ngnix:
+    image: mynginx:v2
+    ports:
+      - 80:80
+    networks:
+      - entry
+    depends_on:
+      - webserver
+
+  db:
+    image: mypostgres:v2
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    networks:
+      - server
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+networks:
+  entry:
+  server:
+
+volumes:
+  db_data:
+    external: false
