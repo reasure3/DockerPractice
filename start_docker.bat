@@ -1,1 +1,2 @@
-docker run -d -p 8080:8080 --name mynode-container mynode:v1
+docker run -d --network mynet --name mynode-container mynode:v2
+docker run -d -p 80:80 --network mynet --name mynginx-container myngnix:v2
