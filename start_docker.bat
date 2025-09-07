@@ -1,1 +1,3 @@
-docker compose up -d
+@echo off
+echo Start docker...
+start docker compose up --watch
